@@ -70,6 +70,10 @@ const ActionButton = styled(Button)`
   :focus, :hover {
     border: 1px solid #26c6da;
   }
+
+  :active {
+    background-color: #e0f7fa;
+  }
 `;
 
 const ActionsContainer = styled.div`

@@ -2,10 +2,10 @@ The site can be found online at [https://hackathon-global.herokuapp.com/](https:
 
 To "log in", the username is `user` and the password is `pass`.
 
-# The Writeup
+## The Writeup
 
 ### Question 1
-Walk us through your development process as you worked on this project. How did you plan out the structure and design of it? Did you encounter any problems? And if so, how did you solve them? Are there any areas of your code that you're particularly proud of or want to point out?
+> Walk us through your development process as you worked on this project. How did you plan out the structure and design of it? Did you encounter any problems? And if so, how did you solve them? Are there any areas of your code that you're particularly proud of or want to point out?
 
 I started by reading through the challenge description and noting down what I’d need to include, what the challenging parts might be, and just generally getting a sense of the “flow” of the app. Next, since I tend to work faster when I have a visual image of what I’m making, I created some mock-ups of what different pages on the site would look like:
 
@@ -22,7 +22,7 @@ Another bug I ran into had to do with the React hook I was using to update my pr
 I’m particularly proud of how I was able to try out styled components while making this! I noticed that Hack the North’s open source repositories seemed to use it a lot, so I wanted to see what it was all about. It was really nice how it kept everything in easy-to-adapt parts, which allowed me to minimize and organize my code better. I look forward to learning it more thoroughly in the future.
 
 ### Question 2
-Given additional time, how would you extend your application to become a fully functional product that hundreds of volunteers would use at Hackathon Global Inc.™'s next event?
+> Given additional time, how would you extend your application to become a fully functional product that hundreds of volunteers would use at Hackathon Global Inc.™'s next event?
 
 I would figure out what happened with my service worker! I’m still really confused about why it doesn’t work. I even started from scratch with create-react-app again and changed nothing but the one line to register the service worker that comes with the thing. I’m thinking it might have something to do with me using Heroku to host, and also maybe with not having implemented redirecting HTTP traffic to HTTPS, but I’ve run out of time to look into that so my app is currently not a Progressive Web App :(
 

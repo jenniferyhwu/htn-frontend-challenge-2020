@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Button, SubHeading, MainHeading } from './Components';
 import getProfileAfterActionMap from './profileActions';
 import types from './types'
+import { Link } from 'react-router-dom';
 
 const HTN_URL = 'https://hackthenorth.netlify.com/api/fe-challenge-attendee';
 
@@ -174,6 +175,11 @@ export default function Profile() {
     sessionStorage.setItem("profile", JSON.stringify(newProfile));
   }
 
+  // removes profile from session store to log out the user
+  const removeProfileFromStore = () => {
+    sessionStorage.removeItem("profile");
+  }
+
   // gets profile from session store if it exists, or gets it from endpoint
   const getProfile = () => {
     let stored = sessionStorage.getItem("profile");
@@ -209,7 +215,7 @@ export default function Profile() {
     return (
       <NoProfileContainer>
         <MainAttr>Looks like you don't have a profile yet &#128558;</MainAttr>
-        <ActionButton>Create a new one</ActionButton>
+        <Link to="/"><ActionButton onClick={removeProfileFromStore}>Log in with a different account</ActionButton></Link>
       </NoProfileContainer>
     )
   } else if (Object.entries(profile).length === 0) { // endpoint not called yet

@@ -9,11 +9,11 @@ To "log in", the username is `user` and the password is `pass`.
 
 I started by reading through the challenge description and noting down what I’d need to include, what the challenging parts might be, and just generally getting a sense of the “flow” of the app. Next, since I tend to work faster when I have a visual image of what I’m making, I created some mock-ups of what different pages on the site would look like:
 
-!(mockup of pages)[https://i.imgur.com/W2R8Zdn.png]
+![mockup of pages](https://i.imgur.com/W2R8Zdn.png)
 
 And also my diagram of the structure of the site lol:
 
-!(site structure diagram)[https://i.imgur.com/jwyDH8V.png]
+![site structure diagram](https://i.imgur.com/jwyDH8V.png)
 
 One of the problems that took me a while to figure out was how to display the profile picture. Since I decided to crop it to a square, getting the dimensions right was the most challenging part of this - I needed the width of the image to match its container, and its height to match its width. After trying a variety of CSS rules, I wound up finding the answer on StackOverflow, as always, and learning a bit more about how padding-bottom works.
 

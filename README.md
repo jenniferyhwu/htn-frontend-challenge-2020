@@ -1,6 +1,6 @@
 The site can be found online at [https://hackathon-global.herokuapp.com/](https://hackathon-global.herokuapp.com/)
 
-To "log in", the username is "user" and the password is "pass".
+To "log in", the username is `user` and the password is `pass`.
 
 # The Writeup
 

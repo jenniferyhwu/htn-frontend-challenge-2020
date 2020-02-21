@@ -2,6 +2,13 @@ The site can be found online at [https://hackathon-global.herokuapp.com/](https:
 
 To "log in", the username is `user` and the password is `pass`.
 
+Also, note that once you've logged in, you have to log out then log back in to view a different profile!
+
+## The Extra Stuff I Did
+- Logout button
+- Updating the profile upon performing an action (check_in and attend_workshop do stuff)
+- Persisting the currently displayed profile offline/across refreshes
+
 ## The Writeup
 
 ### Question 1

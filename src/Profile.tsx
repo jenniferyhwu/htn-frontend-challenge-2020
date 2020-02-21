@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import styled from "styled-components";
 import { Button, SubHeading, MainHeading } from './Components';
-import { getProfileAfterActionMap } from './profileActions';
+import getProfileAfterActionMap from './profileActions';
+import types from './types'
 
 const HTN_URL = 'https://hackthenorth.netlify.com/api/fe-challenge-attendee';
 
@@ -13,6 +14,13 @@ const LinkAttr = styled.a`
 const DescAttr = styled.p`
   color: #26c6da;
   line-height: 1.5em;
+`;
+
+const DescAttrContainer = styled.div`
+  @media (min-width: 769px) {
+    max-height: 50vh;
+    overflow: scroll;
+  }
 `;
 
 const SubAttr = styled(SubHeading)`
@@ -73,6 +81,8 @@ const ActionsContainer = styled.div`
   }
 `;
 
+// the padding-bottom and width thing makes it so the height equals the width
+// this allows the image to display as a square, regardless of its actual dimensions
 const ProfilePictureContainer = styled.div`
   padding-bottom: 100%;
   width: 100%;
@@ -128,12 +138,12 @@ const NoProfileContainer = styled.div`
   }
 `;
 
-const snakeCaseToTitleCase = (s: string) => {
+const snakeCaseToTitleCase = (s: types.AttendeeType) => {
   let buf = s.charAt(0).toUpperCase() + s.substr(1)
   return buf.replace(/_/g, " ");
 }
 
-const getTypeSpecificAttributes = (profile: any) => {
+const getTypeSpecificAttributes = (profile: types.AttendeeProfile) => {
   if (profile.type === "hacker") {
     return "Workshops attended: " + profile.num_workshops_attended;
   } else if (profile.type === "volunteer") {
@@ -147,7 +157,7 @@ const getTypeSpecificAttributes = (profile: any) => {
 }
 
 export default function Profile() {
-  const [profile, setProfileInState] = useState<any>({});
+  const [profile, setProfileInState] = useState<types.EndpointResponse>({});
 
   // this is necessary because the react hook doesn't recognize changes to profile's properties as changes to state,
   // so with this we can trigger a forced rerender
@@ -155,7 +165,7 @@ export default function Profile() {
   const forceRerender = () => updateState({});
 
   // sets profile in state and storage so it can be viewed across refreshes
-  const setProfile = (newProfile: any) => {
+  const setProfile = (newProfile: types.EndpointResponse) => {
     setProfileInState(newProfile);
     sessionStorage.setItem("profile", JSON.stringify(newProfile));
   }
@@ -164,22 +174,22 @@ export default function Profile() {
   const getProfile = () => {
     let stored = sessionStorage.getItem("profile");
     if (stored) {
-      setProfileInState(JSON.parse(stored));
+      setProfileInState(JSON.parse(stored) as types.EndpointResponse);
     } else {
-      axios.get(HTN_URL).then((response: any) =>
+      axios.get(HTN_URL).then((response: types.EndpointResponse) =>
         setProfile(response.data)
       )
     }
   }
 
-  // note that this function is only ever called after the profile is set
+  // note that this function is only ever called after the profile is set (and not null)
   const getActionButton = (action: string) => {
     if (action === "check_in" && profile.checked_in) {
       return <ConfirmedButton as="div" key={action}>Checked in</ConfirmedButton>
     }
 
     let onClickAction = () => {
-      let getProfileAfterAction = (getProfileAfterActionMap as any)[action];
+      let getProfileAfterAction = (getProfileAfterActionMap as types.AttendeeProfile)[action];
       if (getProfileAfterAction) {
         setProfile(getProfileAfterAction(profile));
         forceRerender();
@@ -220,7 +230,9 @@ export default function Profile() {
             <SubAttr>{snakeCaseToTitleCase(profile.type)}</SubAttr>
             <SubAttr>{getTypeSpecificAttributes(profile)}</SubAttr>
           </SubAttrContainer>
-          <DescAttr>{profile.bio}</DescAttr>
+          <DescAttrContainer>
+            <DescAttr>{profile.bio}</DescAttr>
+          </DescAttrContainer>
         </RightContainer>
       </Container>
     )
